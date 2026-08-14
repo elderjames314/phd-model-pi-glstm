@@ -1,0 +1,73 @@
+flowchart TD
+
+    A[Raw Battery Dataset] --> B[Data Preprocessing]
+
+    B --> B1[Data Cleaning]
+    B1 --> B2[Feature Selection]
+    B2 --> B3[Feature Scaling]
+    B3 --> B4[SoH and RUL Target Construction]
+
+    B4 --> C[Chronological Sequence Generation]
+
+    C --> C1[Sequence Length = 10]
+    C1 --> C2[Input Shape = 10 × 4]
+
+    C2 --> D[Dataset Partitioning]
+
+    D --> D1[Training Set<br/>955 Sequences]
+    D --> D2[Validation Set<br/>138 Sequences]
+    D --> D3[Test Set<br/>84 Sequences]
+
+    D1 --> E[Model Training]
+    D2 --> E
+
+    E --> F1[Baseline LSTM]
+    E --> F2[Proposed PI-GLSTM]
+
+    F1 --> G1[LSTM Temporal Representation]
+    G1 --> G2[Dense Layer]
+    G2 --> G3[SoH + RUL Prediction]
+
+    F2 --> H1[LSTM Temporal Representation]
+    H1 --> H2[Physics-Informed Degradation Mechanism]
+    H2 --> H3[Non-Negative Degradation Increment]
+    H3 --> H4[Cumulative Degradation]
+    H4 --> H5[Monotonic SoH Trajectory]
+    H5 --> H6[SoH + RUL Prediction]
+
+    G3 --> I[Model Selection]
+    H6 --> I
+
+    I --> I1[Training / Validation Loss]
+    I1 --> I2[Best Validation Checkpoint]
+    I2 --> J[Test Set Evaluation]
+
+    D3 --> J
+
+    J --> K[Inverse Target Transformation]
+
+    K --> L[Performance Evaluation]
+
+    L --> L1[MAE]
+    L --> L2[RMSE]
+    L --> L3[R²]
+    L --> L4[MAPE]
+
+    L --> M[Physical Consistency Evaluation]
+
+    M --> M1[SoH Monotonicity]
+    M1 --> M2[Violation Rate]
+    M2 --> M3[Monotonicity Score]
+    M3 --> M4[Upward Movement Analysis]
+
+    L --> N[Comparative Analysis]
+    M --> N
+
+    N --> N1[Baseline LSTM]
+    N --> N2[Proposed PI-GLSTM]
+
+    N1 --> O[Accuracy vs Physical Consistency]
+    N2 --> O
+
+    O --> P[Interpretation of Results]
+    P --> Q[Implications for Battery Prognostics]

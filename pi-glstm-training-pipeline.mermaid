@@ -1,0 +1,33 @@
+flowchart LR
+    A[Battery Dataset] --> B[Data Preprocessing]
+    B --> C[Feature Selection]
+    C --> D[Feature Scaling]
+    D --> E[Chronological Sequence Generation]
+
+    E --> F[Train Set]
+    E --> G[Validation Set]
+    E --> H[Test Set]
+
+    F --> I[PI-GLSTM Model]
+
+    I --> I1[LSTM Temporal Encoder]
+    I1 --> I2[SoH Degradation Head]
+    I1 --> I3[RUL Prediction Head]
+
+    I2 --> I4[Softplus]
+    I4 --> I5[Non-negative Degradation Increment]
+    I5 --> I6[Cumulative Degradation]
+    I6 --> I7[SoH Trajectory]
+
+    I3 --> J[RUL Prediction]
+
+    I7 --> K[Composite Loss]
+    J --> K
+
+    G --> L[Validation Loss]
+    L --> M[Early Stopping / Best Model Restoration]
+
+    K --> N[Backpropagation]
+    N --> I
+
+    M --> O[Trained PI-GLSTM]

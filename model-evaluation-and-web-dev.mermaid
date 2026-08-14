@@ -1,0 +1,39 @@
+flowchart LR
+    A[Trained PI-GLSTM] --> B[Test Dataset]
+
+    B --> C[Model Inference]
+
+    C --> D[SoH Prediction]
+    C --> E[RUL Prediction]
+
+    D --> F[Inverse Transformation]
+    E --> G[Inverse Transformation]
+
+    F --> H[SoH Evaluation]
+    G --> I[RUL Evaluation]
+
+    H --> H1[MAE]
+    H --> H2[RMSE]
+    H --> H3[R²]
+    H --> H4[MAPE]
+    H --> H5[Monotonicity]
+
+    I --> I1[MAE]
+    I --> I2[RMSE]
+    I --> I3[R²]
+    I --> I4[MAPE]
+
+    H --> J[Comparative Analysis]
+    I --> J
+
+    A --> K[Saved Model Weights]
+
+    K --> L[Streamlit Application]
+
+    L --> M[User Input]
+    M --> N[Preprocessing]
+    N --> O[PI-GLSTM Inference]
+
+    O --> P[SoH Dashboard]
+    O --> Q[RUL Dashboard]
+    O --> R[Prediction Visualisation]
